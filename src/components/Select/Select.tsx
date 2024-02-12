@@ -14,7 +14,7 @@ type SelectProps = React.ComponentProps<"div"> & {
   placeholder?: string;
 };
 
-export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
+const Select = React.forwardRef<HTMLDivElement, SelectProps>(
   (
     {
       label = "Select Options",
@@ -193,3 +193,5 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
 );
 
 Select.displayName = "Select";
+
+export default Select;
