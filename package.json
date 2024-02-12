@@ -3,12 +3,17 @@
   "description": "Personalized UI Library",
   "version": "0.0.1",
   "type": "module",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
   "files": [
     "/dist"
   ],
+  "main": "dist/test-umd.cjs",
+  "module": "dist/test.js",
+  "exports": {
+    ".": {
+      "import": "./dist/test.js",
+      "require": "./dist/test-umd.cjs"
+    }
+  },
   "author": "Umma Ahimsha <uahimsha@gmail.com>",
   "license": "MIT",
   "publishConfig": {
@@ -22,9 +27,6 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0"
   },
   "dependencies": {
     "lucide-react": "^0.325.0",
