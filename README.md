@@ -6,10 +6,10 @@ Custom UI Library built with React, StoryBook, and TailwindCSS
 
 1. Setup your react project with TaillwindCSS configured. Please refer to [Tailwind CSS installation guide](https://tailwindcss.com/docs/installation/framework-guides).\*
 
-1. Add the package
+2. Install this package (you can also use `npm` or `yarn`)
 
 ```sh
-pnpm install @hydego17/test-ui #you can use npm/yarn
+pnpm install @hydego17/test-ui
 ```
 
 2. Configure your `tailwind.config.js` to add the following line:
