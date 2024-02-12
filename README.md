@@ -2,6 +2,8 @@
 
 Custom UI Library built with React, Storybook and TailwindCSS
 
+[Storybook Preview](https://65ca6b83f6fd47bf53cbe1f4-vdcqiwkpax.chromatic.com/)
+
 ## Installation
 
 1. Setup your React project with TaillwindCSS configured. Please refer to [Tailwind CSS installation guide](https://tailwindcss.com/docs/installation/framework-guides).\*
