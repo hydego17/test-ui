@@ -23,6 +23,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       withSearch = false,
       onChange,
       placeholder,
+      className,
       ...props
     },
     ref
@@ -94,7 +95,11 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     };
 
     return (
-      <div {...props} ref={areaRef} className="relative">
+      <div
+        ref={areaRef}
+        className={cn("relative w-[400px]", className)}
+        {...props}
+      >
         {label && <div className="p-0.5 text-sm text-gray-700">{label}</div>}
 
         {/* Select Trigger */}
@@ -102,7 +107,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
           ref={ref}
           onClick={handleTrigger}
           className={cn(
-            "cursor-pointer p-1.5 border transition-colors w-[400px] min-h-[35px] rounded flex items-center justify-between gap-2",
+            "cursor-pointer p-1.5 border transition-colors min-h-[35px] rounded flex items-center justify-between gap-2",
             opened ? "border-blue-400" : "hover:border-blue-400"
           )}
         >
