@@ -52,6 +52,12 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       }
     }, [withSearch, opened]);
 
+    useEffect(() => {
+      if (!multiple && selected.length > 1) {
+        setSelected((prev) => [prev[0]]);
+      }
+    }, [multiple, selected.length]);
+
     const handleTrigger = useCallback(() => {
       setOpened((prev) => !prev);
     }, []);
@@ -123,7 +129,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
                   className="flex items-center gap-1 px-1 rounded text-[11px] border bg-gray-200 hover:bg-red-100 h-fit transition-colors"
                 >
                   <span>{item.label}</span>
-                  {multiple && <XCircleIcon size={12} />}
+                  <XCircleIcon size={12} />
                 </div>
               ))
             ) : (
