@@ -25,14 +25,22 @@ content: [
 3. Import your desired component
 
 ```tsx
+import { useState } from "react";
 import { Select } from "@hydego17/test-ui";
 
-function App() {
+const App = () => {
+  const [values, setValues] = useState([]);
+
+  const handleChange = (options) => {
+    // perform action here
+    setValues(options);
+  };
+
   return (
     <Select
-      id="my-select-1"
       multiple
       withSearch
+      onChange={handleChange}
       options={[
         {
           value: "1",
@@ -49,7 +57,7 @@ function App() {
       ]}
     />
   );
-}
+};
 
 export default App;
 ```
