@@ -1,22 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { XCircleIcon, ChevronDownIcon, SearchIcon } from "lucide-react";
-import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { useClickOutside } from "@/hooks/use-click-outside";
 
-const selectStyles = cva();
-
 type Option = { label: string; value: string };
 
-type SelectProps = React.ComponentProps<"div"> &
-  VariantProps<typeof selectStyles> & {
-    label?: React.ReactNode;
-    options: Option[];
-    multiple: boolean;
-    withSearch: boolean;
-    onChange?: (options: Option[]) => void;
-    placeholder?: string;
-  };
+type SelectProps = React.ComponentProps<"div"> & {
+  label?: React.ReactNode;
+  options: Option[];
+  multiple: boolean;
+  withSearch: boolean;
+  onChange?: (options: Option[]) => void;
+  placeholder?: string;
+};
 
 export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
   (
