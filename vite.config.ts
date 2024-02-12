@@ -2,6 +2,7 @@ import path from "path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+import { libInjectCss, scanEntries } from "vite-plugin-lib-inject-css";
 
 export default defineConfig({
   resolve: {
@@ -11,12 +12,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: "./src/index.ts", // Specifies the entry point for building the library.
-      name: "test-ui", // Sets the name of the generated library.
-      fileName: (format) => `index.${format}.js`, // Generates the output file name based on the format.
+      entry: "./src/index.ts",
+      name: "test-ui",
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom", "react/jsx-runtime", "tailwindcss"],
       output: {
         globals: {
           react: "React",
@@ -24,8 +25,12 @@ export default defineConfig({
         },
       },
     },
-    sourcemap: true, // Generates source maps for debugging.
-    emptyOutDir: true, // Clears the output directory before building.
+    sourcemap: true,
+    emptyOutDir: true,
   },
-  plugins: [react(), dts()], // Uses the 'vite-plugin-dts' plugin for generating TypeScript declaration files (d.ts).
+  plugins: [
+    libInjectCss(),
+    react(),
+    dts(),
+  ],
 });
