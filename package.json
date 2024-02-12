@@ -1,10 +1,20 @@
 {
-  "name": "hydego-ui-makyo",
+  "name": "@hydego17/test-ui",
+  "description": "Personalized UI Library",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "author": "Umma Ahimsha <uahimsha@gmail.com>",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "http://npm.pkg.github/@hydego17"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -13,7 +23,11 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
   "dependencies": {
+    "lucide-react": "^0.325.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -44,6 +58,7 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.0",
+    "vite-plugin-dts": "^3.7.2",
     "vite-tsconfig-paths": "^4.3.1"
   }
 }
