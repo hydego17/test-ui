@@ -2,7 +2,7 @@
 
 Custom UI Library built with React, Storybook and TailwindCSS
 
-[Storybook Preview](https://65ca6b83f6fd47bf53cbe1f4-vdcqiwkpax.chromatic.com/)
+[Storybook Preview](https://65ca6b83f6fd47bf53cbe1f4-ygjcegbvjs.chromatic.com/)
 
 ## Installation
 
