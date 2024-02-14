@@ -37,7 +37,10 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
 
     const filteredOptions = search
       ? options.filter((item) => {
-          const matchLabel = !!item.label.toLowerCase().includes(search);
+          const matchLabel = !!item.label
+            .toLowerCase()
+            .includes(search.toLowerCase());
+            
           return matchLabel;
         })
       : options;
@@ -121,6 +124,7 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
             {selected.length ? (
               selected.map((item) => (
                 <div
+                  key={item.value}
                   role="button"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -179,8 +183,8 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
                   );
                   return (
                     <div
-                      role="button"
                       key={opt.value}
+                      role="button"
                       onClick={() => handleSelect(opt)}
                       className={cn(
                         "text-sm px-2 py-1",

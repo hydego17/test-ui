@@ -19,7 +19,7 @@ export const Default: Story = {
     label: "Select options:",
     id: 'select-1',
     multiple: true,
-    withSearch: false,
+    withSearch: true,
     placeholder: "",
     options: [
       {
