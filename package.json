@@ -21,9 +21,6 @@
     "email": "uahimsha@gmail.com"
   },
   "license": "MIT",
-  "publishConfig": {
-    "registry": "http://npm.pkg.github/@hydego17"
-  },
   "scripts": {
     "dev": "vite",
     "prepare": "npm run build",
