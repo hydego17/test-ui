@@ -8,13 +8,18 @@ Custom UI Library built with React, Storybook and TailwindCSS
 
 1. Setup your React project with TaillwindCSS configured. Please refer to [Tailwind CSS installation guide](https://tailwindcss.com/docs/installation/framework-guides).\*
 
-2. Install this package to your projectt
+2. Create `.nprmc` file in your project root directory, then add this line:
+```
+@hydego17:registry=https://npm.pkg.github.com
+```
+
+3. Install this package to your projectt
 
 ```sh
 pnpm install @hydego17/test-ui
 ```
 
-2. Add the following line to your `tailwind.config.js` content's array:
+4. Add the following line to your `tailwind.config.js` content's array:
 
 ```
 content: [
@@ -24,7 +29,7 @@ content: [
   ],
 ```
 
-3. Import your desired component
+5. Import your desired component
 
 ```tsx
 import { useState } from "react";
