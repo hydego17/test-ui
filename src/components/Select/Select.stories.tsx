@@ -14,10 +14,16 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const slowOptionlist = [
+  ...Array(2000)
+    .fill(null)
+    .map((_, i) => ({ value: String(i + 6), label: `Option ${i + 6}` })),
+];
+
 export const Default: Story = {
   args: {
     label: "Select options:",
-    id: 'select-1',
+    id: "select-1",
     multiple: true,
     withSearch: true,
     placeholder: "",
@@ -42,10 +48,7 @@ export const Default: Story = {
         value: "5",
         label: "Long Long Long Long Option 5",
       },
-      {
-        value: "6",
-        label: "Long Long Long Long Long Option 6",
-      },
+      ...slowOptionlist,
     ],
   },
 };

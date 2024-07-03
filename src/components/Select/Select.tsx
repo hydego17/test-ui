@@ -1,9 +1,73 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { XCircleIcon, ChevronDownIcon, SearchIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useClickOutside } from "@/hooks/use-click-outside";
 
 type Option = { label: string; value: string };
+
+type RenderOptionProps = {
+  options: Option[];
+  selected: Option[];
+  onSelect(opts: Option): void;
+  search: string;
+};
+
+const RenderOptions = React.memo(
+  ({ options, selected, onSelect, search }: RenderOptionProps) => {
+    // render label
+    const renderOptionLabel = (label: string) => {
+      let rendered = label;
+      if (search) {
+        const normReq = search
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .trim()
+          .split(" ")
+          .sort((a, b) => b.length - a.length);
+
+        rendered = label.replace(
+          new RegExp(`(${normReq.join("|")})`, "gi"),
+          (match) => "<mark>" + match + "</mark>"
+        );
+      }
+
+      return rendered;
+    };
+
+    return (
+      <div className="smooth-scrollbar max-h-[200px] overflow-auto py-2">
+        {options.length ? (
+          options?.map((opt) => {
+            const alreadySelected = selected.find((i) => i.value === opt.value);
+
+            return (
+              <div
+                key={opt.value}
+                role="button"
+                onClick={() => onSelect(opt)}
+                className={cn(
+                  "text-sm px-2 py-1",
+                  alreadySelected ? "bg-gray-100" : "hover:bg-gray-100"
+                )}
+                dangerouslySetInnerHTML={{
+                  __html: renderOptionLabel(opt.label),
+                }}
+              ></div>
+            );
+          })
+        ) : (
+          <div className="text-slate-500 text-sm p-2">No item found</div>
+        )}
+      </div>
+    );
+  }
+);
 
 type SelectProps = React.ComponentProps<"div"> & {
   label?: React.ReactNode;
@@ -32,15 +96,17 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     const [search, setSearch] = useState("");
     const [opened, setOpened] = useState(false);
 
+    const defferedSearch = useDeferredValue(search);
+
     const areaRef = useClickOutside(() => setOpened(false));
     const searchRef = useRef<HTMLInputElement>(null);
 
-    const filteredOptions = search
+    const filteredOptions = defferedSearch
       ? options.filter((item) => {
           const matchLabel = !!item.label
             .toLowerCase()
-            .includes(search.toLowerCase());
-            
+            .includes(defferedSearch.toLowerCase());
+
           return matchLabel;
         })
       : options;
@@ -83,25 +149,6 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
     const handleRemove = useCallback((item: Option) => {
       setSelected((prev) => prev.filter((s) => s.value !== item.value));
     }, []);
-
-    const renderOptionLabel = (label: string) => {
-      let rendered = label;
-      if (search) {
-        const normReq = search
-          .toLowerCase()
-          .replace(/\s+/g, " ")
-          .trim()
-          .split(" ")
-          .sort((a, b) => b.length - a.length);
-
-        rendered = label.replace(
-          new RegExp(`(${normReq.join("|")})`, "gi"),
-          (match) => "<mark>" + match + "</mark>"
-        );
-      }
-
-      return rendered;
-    };
 
     return (
       <div
@@ -175,31 +222,12 @@ const Select = React.forwardRef<HTMLDivElement, SelectProps>(
               </div>
             )}
 
-            <div className="smooth-scrollbar max-h-[200px] overflow-auto py-2">
-              {filteredOptions.length ? (
-                filteredOptions?.map((opt) => {
-                  const alreadySelected = selected.find(
-                    (i) => i.value === opt.value
-                  );
-                  return (
-                    <div
-                      key={opt.value}
-                      role="button"
-                      onClick={() => handleSelect(opt)}
-                      className={cn(
-                        "text-sm px-2 py-1",
-                        alreadySelected ? "bg-gray-100" : "hover:bg-gray-100"
-                      )}
-                      dangerouslySetInnerHTML={{
-                        __html: renderOptionLabel(opt.label),
-                      }}
-                    ></div>
-                  );
-                })
-              ) : (
-                <div className="text-slate-500 text-sm p-2">No item found</div>
-              )}
-            </div>
+            <RenderOptions
+              options={filteredOptions}
+              selected={selected}
+              onSelect={handleSelect}
+              search={defferedSearch}
+            />
           </div>
         </div>
       </div>
